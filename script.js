@@ -2,7 +2,7 @@ function login() {
     let user = document.getElementById("username").value;
 
     if (user) {
-        document.getElementById("loginPage").classList.add("hidden");
+        document.getElementById("loginPage").style.display = "none";
         document.getElementById("mainApp").classList.remove("hidden");
         document.getElementById("userDisplay").innerText = "Welcome, " + user;
         loadComplaints();
@@ -11,79 +11,63 @@ function login() {
     }
 }
 
-// Switch sections
 function showSection(section) {
     document.getElementById("formSection").classList.toggle("hidden", section !== "form");
     document.getElementById("trackSection").classList.toggle("hidden", section !== "track");
 }
 
-// GPS LOCATION
+/* GPS */
 function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(pos => {
-            let lat = pos.coords.latitude;
-            let lon = pos.coords.longitude;
-            document.getElementById("location").value = lat + ", " + lon;
-        }, () => {
-            alert("Allow location access");
-        });
-    } else {
-        alert("Geolocation not supported");
-    }
+    navigator.geolocation.getCurrentPosition(pos => {
+        document.getElementById("location").value =
+            pos.coords.latitude + ", " + pos.coords.longitude;
+    });
 }
 
-// Submit complaint
+/* Submit */
 function submitComplaint() {
     let name = document.getElementById("name").value;
     let category = document.getElementById("category").value;
     let complaint = document.getElementById("complaint").value;
     let location = document.getElementById("location").value;
 
-    if (!name || !complaint) {
-        alert("Fill all fields");
-        return;
-    }
+    if (!name || !complaint) return alert("Fill all fields");
 
     let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
 
-    let newComplaint = {
+    complaints.push({
         id: "C" + Math.floor(Math.random() * 10000),
         name,
         category,
         complaint,
         location,
         status: "Pending"
-    };
+    });
 
-    complaints.push(newComplaint);
     localStorage.setItem("complaints", JSON.stringify(complaints));
-
-    alert("Complaint Submitted!");
     loadComplaints();
 }
 
-// Load complaints
+/* Load */
 function loadComplaints() {
     let list = document.getElementById("complaintList");
     list.innerHTML = "";
 
     let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
 
-    complaints.forEach((c, index) => {
+    complaints.forEach((c, i) => {
         let li = document.createElement("li");
-        li.className = "card";
 
-        let mapLink = c.location ? `https://www.google.com/maps?q=${c.location}` : "#";
+        let map = c.location ? `https://maps.google.com?q=${c.location}` : "#";
 
         li.innerHTML = `
-            <b>ID:</b> ${c.id}<br>
-            <b>${c.category}</b><br>
+            <b>${c.id}</b><br>
+            ${c.category}<br>
             ${c.complaint}<br>
-            📍 ${c.location || "Not provided"}<br>
-            <a href="${mapLink}" target="_blank">View on Map</a><br>
-            <span class="status ${c.status === 'Pending' ? 'pending-status' : 'resolved-status'}">${c.status}</span>
-            <br><br>
-            <button onclick="resolveComplaint(${index})">Mark Resolved</button>
+            📍 ${c.location || "N/A"}<br>
+            <a href="${map}" target="_blank">Map</a><br>
+            <span class="status ${c.status === 'Pending' ? 'pending-status':'resolved-status'}">${c.status}</span><br>
+            <button onclick="resolve(${i})">Resolve</button>
         `;
 
         list.appendChild(li);
@@ -92,31 +76,26 @@ function loadComplaints() {
     updateDashboard();
 }
 
-// Resolve complaint
-function resolveComplaint(index) {
+function resolve(i) {
     let complaints = JSON.parse(localStorage.getItem("complaints"));
-    complaints[index].status = "Resolved";
+    complaints[i].status = "Resolved";
     localStorage.setItem("complaints", JSON.stringify(complaints));
     loadComplaints();
 }
 
-// Dashboard
+/* Dashboard */
 function updateDashboard() {
-    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+    let c = JSON.parse(localStorage.getItem("complaints")) || [];
 
-    document.getElementById("total").innerText = complaints.length;
-    document.getElementById("pending").innerText =
-        complaints.filter(c => c.status === "Pending").length;
-    document.getElementById("resolved").innerText =
-        complaints.filter(c => c.status === "Resolved").length;
+    document.getElementById("total").innerText = c.length;
+    document.getElementById("pending").innerText = c.filter(x=>x.status==="Pending").length;
+    document.getElementById("resolved").innerText = c.filter(x=>x.status==="Resolved").length;
 }
 
-// Search
+/* Search */
 function searchComplaint() {
-    let input = document.getElementById("search").value.toLowerCase();
-    let items = document.querySelectorAll("#complaintList li");
-
-    items.forEach(item => {
-        item.style.display = item.innerText.toLowerCase().includes(input) ? "" : "none";
+    let val = document.getElementById("search").value.toLowerCase();
+    document.querySelectorAll("#complaintList li").forEach(li => {
+        li.style.display = li.innerText.toLowerCase().includes(val) ? "" : "none";
     });
 }
