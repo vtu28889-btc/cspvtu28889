@@ -8,69 +8,78 @@
 
 <body>
 
-<div class="navbar">
-    <h2>Smart City Grievance</h2>
-    <span id="userDisplay"></span>
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="login-container">
+
+    <div class="login-image">
+        <img src="city.jpg" alt="City">
+    </div>
+
+    <div class="login-form">
+        <h2>Smart City Grievance</h2>
+        <p>Report issues easily in your city</p>
+
+        <input type="text" id="username" placeholder="Enter Username">
+        <button onclick="login()">Login</button>
+    </div>
+
 </div>
 
-<div class="container">
-
-<!-- LOGIN -->
-<div id="loginPage" class="card">
-    <h3>Login</h3>
-    <input type="text" id="username" placeholder="Enter Username">
-    <button onclick="login()">Login</button>
-</div>
-
-<!-- MAIN -->
+<!-- MAIN APP -->
 <div id="mainApp" class="hidden">
 
-    <!-- DASHBOARD -->
-    <div class="dashboard">
-        <div class="box total">Total <br><span id="total"></span></div>
-        <div class="box pending">Pending <br><span id="pending"></span></div>
-        <div class="box resolved">Resolved <br><span id="resolved"></span></div>
+    <div class="navbar">
+        <h2>Smart City Grievance</h2>
+        <span id="userDisplay"></span>
     </div>
 
-    <!-- NAV -->
-    <div class="nav-buttons">
-        <button onclick="showSection('form')">Submit</button>
-        <button onclick="showSection('track')">Track</button>
+    <div class="container">
+
+        <!-- DASHBOARD -->
+        <div class="dashboard">
+            <div class="box total">Total <br><span id="total"></span></div>
+            <div class="box pending">Pending <br><span id="pending"></span></div>
+            <div class="box resolved">Resolved <br><span id="resolved"></span></div>
+        </div>
+
+        <!-- NAV -->
+        <div class="nav-buttons">
+            <button onclick="showSection('form')">Submit</button>
+            <button onclick="showSection('track')">Track</button>
+        </div>
+
+        <!-- FORM -->
+        <div id="formSection" class="card">
+            <h3>Submit Complaint</h3>
+
+            <input type="text" id="name" placeholder="Your Name">
+
+            <select id="category">
+                <option>Road Issue</option>
+                <option>Water Problem</option>
+                <option>Electricity</option>
+                <option>Garbage</option>
+            </select>
+
+            <textarea id="complaint" placeholder="Describe issue"></textarea>
+
+            <!-- GPS -->
+            <input type="text" id="location" placeholder="Location (auto)" readonly>
+            <button onclick="getLocation()">📍 Get Current Location</button>
+
+            <button onclick="submitComplaint()">Submit</button>
+        </div>
+
+        <!-- TRACK -->
+        <div id="trackSection" class="card hidden">
+            <h3>Track Complaints</h3>
+
+            <input type="text" id="search" placeholder="Search..." onkeyup="searchComplaint()">
+
+            <ul id="complaintList"></ul>
+        </div>
+
     </div>
-
-    <!-- FORM -->
-    <div id="formSection" class="card">
-        <h3>Submit Complaint</h3>
-
-        <input type="text" id="name" placeholder="Your Name">
-
-        <select id="category">
-            <option>Road Issue</option>
-            <option>Water Problem</option>
-            <option>Electricity</option>
-            <option>Garbage</option>
-        </select>
-
-        <textarea id="complaint" placeholder="Describe issue"></textarea>
-
-        <!-- GPS -->
-        <input type="text" id="location" placeholder="Location (auto)" readonly>
-        <button onclick="getLocation()">📍 Get Current Location</button>
-
-        <button onclick="submitComplaint()">Submit</button>
-    </div>
-
-    <!-- TRACK -->
-    <div id="trackSection" class="card hidden">
-        <h3>Track Complaints</h3>
-
-        <input type="text" id="search" placeholder="Search..." onkeyup="searchComplaint()">
-
-        <ul id="complaintList"></ul>
-    </div>
-
-</div>
-
 </div>
 
 <script src="script.js"></script>
