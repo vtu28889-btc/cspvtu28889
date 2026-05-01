@@ -1,49 +1,42 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: Arial;
     margin: 0;
     background: linear-gradient(to right, #4facfe, #00f2fe);
 }
 
-/* Navbar */
 .navbar {
     background: #1e293b;
     color: white;
-    padding: 15px 30px;
+    padding: 15px;
     display: flex;
     justify-content: space-between;
 }
 
-/* Layout */
 .container {
     width: 85%;
     margin: auto;
     margin-top: 20px;
 }
 
-/* Cards */
 .card {
     background: white;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 10px;
     margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    animation: fadeIn 0.5s;
 }
 
-/* Dashboard */
-.dashboard {
-    display: flex;
-    justify-content: space-around;
-    font-weight: bold;
-}
-
-/* Buttons */
-button {
+input, textarea, select {
+    width: 100%;
     padding: 10px;
-    border: none;
-    border-radius: 6px;
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
     background: #3b82f6;
     color: white;
+    border: none;
     cursor: pointer;
 }
 
@@ -51,29 +44,32 @@ button:hover {
     background: #2563eb;
 }
 
-/* Inputs */
-input, textarea, select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
+.hidden {
+    display: none;
 }
 
-/* Status */
-.status {
-    padding: 5px 10px;
-    border-radius: 5px;
+.dashboard {
+    display: flex;
+    gap: 15px;
+}
+
+.box {
+    flex: 1;
+    padding: 20px;
     color: white;
-    font-size: 12px;
+    border-radius: 10px;
+    text-align: center;
 }
 
+.total { background: #3b82f6; }
 .pending { background: orange; }
 .resolved { background: green; }
 
-/* Hide */
-.hidden { display: none; }
-
-/* Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.status {
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
 }
+
+.pending-status { background: orange; }
+.resolved-status { background: green; }
