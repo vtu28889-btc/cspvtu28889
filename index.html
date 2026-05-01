@@ -156,6 +156,17 @@ function loadComplaints() {
         let li = document.createElement("li");
         li.innerHTML = `<b>${c.name}</b> (${c.category}) - ${c.complaint} <br>Status: ${c.status}`;
         list.appendChild(li);
+        function updateDashboard() {
+    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+
+    let total = complaints.length;
+    let pending = complaints.filter(c => c.status === "Pending").length;
+    let resolved = complaints.filter(c => c.status === "Resolved").length;
+
+    document.getElementById("total").innerText = total;
+    document.getElementById("pending").innerText = pending;
+    document.getElementById("resolved").innerText = resolved;
+}
     });
 }
 </script>
