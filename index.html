@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart City Grievance System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <h2>Smart City Grievance</h2>
+    <span id="userDisplay"></span>
+</div>
+
+<div class="container">
+
+    <!-- LOGIN -->
+    <div id="loginPage" class="card">
+        <h3>Login</h3>
+        <input type="text" id="username" placeholder="Enter Username">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="mainApp" class="hidden">
+
+        <!-- Dashboard -->
+        <div class="card dashboard">
+            <div>Total: <span id="total"></span></div>
+            <div>Pending: <span id="pending"></span></div>
+            <div>Resolved: <span id="resolved"></span></div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <button onclick="showSection('form')">Submit</button>
+            <button onclick="showSection('track')">Track</button>
+        </div>
+
+        <!-- Submit Section -->
+        <div id="formSection" class="card">
+            <h3>Submit Complaint</h3>
+            <input type="text" id="name" placeholder="Your Name">
+
+            <select id="category">
+                <option>Road Issue</option>
+                <option>Water Problem</option>
+                <option>Electricity</option>
+                <option>Garbage</option>
+            </select>
+
+            <textarea id="complaint" placeholder="Describe issue"></textarea>
+            <button onclick="submitComplaint()">Submit</button>
+        </div>
+
+        <!-- Track Section -->
+        <div id="trackSection" class="card hidden">
+            <h3>Track Complaints</h3>
+            <input type="text" id="search" placeholder="Search..." onkeyup="searchComplaint()">
+            <ul id="complaintList"></ul>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
