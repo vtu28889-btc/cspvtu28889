@@ -2,22 +2,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Smart City Grievance System</title>
+<title>Smart City Grievance</title>
+
 <link rel="stylesheet" href="style.css">
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
 
-<!-- LOGIN PAGE -->
+<!-- LOGIN -->
 <div id="loginPage" class="login-container">
 
     <div class="login-image">
-        <img src="city.jpg" alt="City">
+        <img src="city.jpg">
     </div>
 
     <div class="login-form">
         <h2>Smart City Grievance</h2>
-        <p>Report issues easily in your city</p>
+        <p>Report & track city issues efficiently</p>
 
         <input type="text" id="username" placeholder="Enter Username">
         <button onclick="login()">Login</button>
@@ -25,11 +30,11 @@
 
 </div>
 
-<!-- MAIN APP -->
+<!-- MAIN -->
 <div id="mainApp" class="hidden">
 
     <div class="navbar">
-        <h2>Smart City Grievance</h2>
+        <h2><i class="fas fa-city"></i> Smart City</h2>
         <span id="userDisplay"></span>
     </div>
 
@@ -37,20 +42,20 @@
 
         <!-- DASHBOARD -->
         <div class="dashboard">
-            <div class="box total">Total <br><span id="total"></span></div>
-            <div class="box pending">Pending <br><span id="pending"></span></div>
-            <div class="box resolved">Resolved <br><span id="resolved"></span></div>
+            <div class="box total"><i class="fas fa-list"></i><br>Total <br><span id="total"></span></div>
+            <div class="box pending"><i class="fas fa-clock"></i><br>Pending <br><span id="pending"></span></div>
+            <div class="box resolved"><i class="fas fa-check-circle"></i><br>Resolved <br><span id="resolved"></span></div>
         </div>
 
         <!-- NAV -->
         <div class="nav-buttons">
-            <button onclick="showSection('form')">Submit</button>
-            <button onclick="showSection('track')">Track</button>
+            <button onclick="showSection('form')"><i class="fas fa-plus"></i> Submit</button>
+            <button onclick="showSection('track')"><i class="fas fa-search"></i> Track</button>
         </div>
 
         <!-- FORM -->
         <div id="formSection" class="card">
-            <h3>Submit Complaint</h3>
+            <h3><i class="fas fa-edit"></i> Submit Complaint</h3>
 
             <input type="text" id="name" placeholder="Your Name">
 
@@ -63,16 +68,15 @@
 
             <textarea id="complaint" placeholder="Describe issue"></textarea>
 
-            <!-- GPS -->
-            <input type="text" id="location" placeholder="Location (auto)" readonly>
-            <button onclick="getLocation()">📍 Get Current Location</button>
+            <input type="text" id="location" placeholder="Location" readonly>
+            <button onclick="getLocation()"><i class="fas fa-map-marker-alt"></i> Get Location</button>
 
             <button onclick="submitComplaint()">Submit</button>
         </div>
 
         <!-- TRACK -->
         <div id="trackSection" class="card hidden">
-            <h3>Track Complaints</h3>
+            <h3><i class="fas fa-list"></i> Track Complaints</h3>
 
             <input type="text" id="search" placeholder="Search..." onkeyup="searchComplaint()">
 
@@ -80,6 +84,7 @@
         </div>
 
     </div>
+
 </div>
 
 <script src="script.js"></script>
