@@ -6,16 +6,14 @@
 
 <link rel="stylesheet" href="style.css">
 
-<!-- ICONS -->
+<!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 
 <body>
 
 <!-- LOGIN -->
 <div id="loginPage" class="login-container">
-
     <div class="login-image">
         <img src="city.jpg">
     </div>
@@ -27,7 +25,6 @@
         <input type="text" id="username" placeholder="Enter Username">
         <button onclick="login()">Login</button>
     </div>
-
 </div>
 
 <!-- MAIN -->
@@ -42,9 +39,9 @@
 
         <!-- DASHBOARD -->
         <div class="dashboard">
-            <div class="box total"><i class="fas fa-list"></i><br>Total <br><span id="total"></span></div>
-            <div class="box pending"><i class="fas fa-clock"></i><br>Pending <br><span id="pending"></span></div>
-            <div class="box resolved"><i class="fas fa-check-circle"></i><br>Resolved <br><span id="resolved"></span></div>
+            <div class="box total">Total <br><span id="total"></span></div>
+            <div class="box pending">Pending <br><span id="pending"></span></div>
+            <div class="box resolved">Resolved <br><span id="resolved"></span></div>
         </div>
 
         <!-- NAV -->
@@ -55,7 +52,7 @@
 
         <!-- FORM -->
         <div id="formSection" class="card">
-            <h3><i class="fas fa-edit"></i> Submit Complaint</h3>
+            <h3>Submit Complaint</h3>
 
             <input type="text" id="name" placeholder="Your Name">
 
@@ -69,22 +66,27 @@
             <textarea id="complaint" placeholder="Describe issue"></textarea>
 
             <input type="text" id="location" placeholder="Location" readonly>
-            <button onclick="getLocation()"><i class="fas fa-map-marker-alt"></i> Get Location</button>
+            <button onclick="getLocation()">📍 Get Location</button>
 
             <button onclick="submitComplaint()">Submit</button>
         </div>
 
         <!-- TRACK -->
         <div id="trackSection" class="card hidden">
-            <h3><i class="fas fa-list"></i> Track Complaints</h3>
+            <h3>Track Complaints</h3>
 
             <input type="text" id="search" placeholder="Search..." onkeyup="searchComplaint()">
 
             <ul id="complaintList"></ul>
         </div>
 
-    </div>
+        <!-- MAP VIEW -->
+        <div id="mapContainer" class="card hidden">
+            <h3>Location Map</h3>
+            <iframe id="mapFrame" width="100%" height="300" style="border:0;"></iframe>
+        </div>
 
+    </div>
 </div>
 
 <script src="script.js"></script>
