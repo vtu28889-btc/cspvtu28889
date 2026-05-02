@@ -20,8 +20,6 @@
 
     <div class="login-form">
         <h2>Smart City Grievance</h2>
-        <p>Report & track city issues efficiently</p>
-
         <input type="text" id="username" placeholder="Enter Username">
         <button onclick="login()">Login</button>
     </div>
@@ -31,64 +29,40 @@
 <div id="mainApp" class="hidden">
 
     <div class="navbar">
-        <h2><i class="fas fa-city"></i> Smart City</h2>
+        <h2>Smart City</h2>
         <span id="userDisplay"></span>
     </div>
 
     <div class="container">
 
-        <!-- DASHBOARD -->
-        <div class="dashboard">
-            <div class="box total">Total <br><span id="total"></span></div>
-            <div class="box pending">Pending <br><span id="pending"></span></div>
-            <div class="box resolved">Resolved <br><span id="resolved"></span></div>
-        </div>
-
-        <!-- NAV -->
-        <div class="nav-buttons">
-            <button onclick="showSection('form')"><i class="fas fa-plus"></i> Submit</button>
-            <button onclick="showSection('track')"><i class="fas fa-search"></i> Track</button>
-        </div>
-
         <!-- FORM -->
-        <div id="formSection" class="card">
+        <div class="card">
             <h3>Submit Complaint</h3>
 
             <input type="text" id="name" placeholder="Your Name">
+            <textarea id="complaint" placeholder="Enter complaint"></textarea>
 
-            <select id="category">
-                <option>Road Issue</option>
-                <option>Water Problem</option>
-                <option>Electricity</option>
-                <option>Garbage</option>
-            </select>
-
-            <textarea id="complaint" placeholder="Describe issue"></textarea>
-
-            <input type="text" id="location" placeholder="Location" readonly>
+            <input type="text" id="location" readonly placeholder="Location">
             <button onclick="getLocation()">📍 Get Location</button>
 
             <button onclick="submitComplaint()">Submit</button>
         </div>
 
-        <!-- TRACK -->
-        <div id="trackSection" class="card hidden">
-            <h3>Track Complaints</h3>
-
-            <input type="text" id="search" placeholder="Search..." onkeyup="searchComplaint()">
-
+        <!-- LIST -->
+        <div class="card">
+            <h3>Complaints</h3>
             <ul id="complaintList"></ul>
         </div>
 
-        <!-- MAP VIEW -->
+        <!-- MAP -->
         <div id="mapContainer" class="card hidden">
             <h3>Location Map</h3>
-            <iframe id="mapFrame" width="100%" height="300" style="border:0;"></iframe>
+            <iframe id="mapFrame" width="100%" height="300"></iframe>
         </div>
 
     </div>
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="script.js"></script>
 </body>
 </html>
