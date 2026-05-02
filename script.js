@@ -1,101 +1,132 @@
-function login() {
-    let user = document.getElementById("username").value;
-
-    if (user) {
-        document.getElementById("loginPage").style.display = "none";
-        document.getElementById("mainApp").classList.remove("hidden");
-        document.getElementById("userDisplay").innerText = "Welcome, " + user;
-        loadComplaints();
-    } else {
-        alert("Enter username");
-    }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: url("bg.jpg") no-repeat center center/cover;
 }
 
-function showSection(section) {
-    document.getElementById("formSection").classList.toggle("hidden", section !== "form");
-    document.getElementById("trackSection").classList.toggle("hidden", section !== "track");
+/* overlay */
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: -1;
 }
 
-/* GPS */
-function getLocation() {
-    navigator.geolocation.getCurrentPosition(pos => {
-        document.getElementById("location").value =
-            pos.coords.latitude + ", " + pos.coords.longitude;
-    });
+/* LOGIN */
+.login-container {
+    display: flex;
+    height: 100vh;
 }
 
-/* Submit */
-function submitComplaint() {
-    let name = document.getElementById("name").value;
-    let category = document.getElementById("category").value;
-    let complaint = document.getElementById("complaint").value;
-    let location = document.getElementById("location").value;
-
-    if (!name || !complaint) return alert("Fill all fields");
-
-    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
-
-    complaints.push({
-        id: "C" + Math.floor(Math.random() * 10000),
-        name,
-        category,
-        complaint,
-        location,
-        status: "Pending"
-    });
-
-    localStorage.setItem("complaints", JSON.stringify(complaints));
-    loadComplaints();
+.login-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Load */
-function loadComplaints() {
-    let list = document.getElementById("complaintList");
-    list.innerHTML = "";
-
-    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
-
-    complaints.forEach((c, i) => {
-        let li = document.createElement("li");
-
-        let map = c.location ? `https://maps.google.com?q=${c.location}` : "#";
-
-        li.innerHTML = `
-            <b>${c.id}</b><br>
-            ${c.category}<br>
-            ${c.complaint}<br>
-            📍 ${c.location || "N/A"}<br>
-            <a href="${map}" target="_blank">Map</a><br>
-            <span class="status ${c.status === 'Pending' ? 'pending-status':'resolved-status'}">${c.status}</span><br>
-            <button onclick="resolve(${i})">Resolve</button>
-        `;
-
-        list.appendChild(li);
-    });
-
-    updateDashboard();
+.login-form {
+    flex: 1;
+    padding: 60px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-function resolve(i) {
-    let complaints = JSON.parse(localStorage.getItem("complaints"));
-    complaints[i].status = "Resolved";
-    localStorage.setItem("complaints", JSON.stringify(complaints));
-    loadComplaints();
+.login-form input {
+    padding: 12px;
+    margin-bottom: 15px;
 }
 
-/* Dashboard */
-function updateDashboard() {
-    let c = JSON.parse(localStorage.getItem("complaints")) || [];
-
-    document.getElementById("total").innerText = c.length;
-    document.getElementById("pending").innerText = c.filter(x=>x.status==="Pending").length;
-    document.getElementById("resolved").innerText = c.filter(x=>x.status==="Resolved").length;
+/* NAVBAR */
+.navbar {
+    background: rgba(30,41,59,0.9);
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
-/* Search */
-function searchComplaint() {
-    let val = document.getElementById("search").value.toLowerCase();
-    document.querySelectorAll("#complaintList li").forEach(li => {
-        li.style.display = li.innerText.toLowerCase().includes(val) ? "" : "none";
-    });
+/* MAIN */
+.container {
+    width: 85%;
+    margin: auto;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    animation: fadeIn 0.5s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* DASHBOARD */
+.dashboard {
+    display: flex;
+    gap: 15px;
+}
+
+.box {
+    flex: 1;
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.total { background: #3b82f6; }
+.pending { background: orange; }
+.resolved { background: green; }
+
+/* INPUT */
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+/* BUTTON */
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2563eb;
+}
+
+/* STATUS */
+.status {
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
+
+.pending-status { background: orange; }
+.resolved-status { background: green; }
+
+.hidden { display: none; }
+
+/* animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
