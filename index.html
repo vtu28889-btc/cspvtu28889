@@ -2,67 +2,93 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Smart City Grievance</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart City Grievance System</title>
 
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico">
+
+<!-- CSS -->
 <link rel="stylesheet" href="style.css">
 
 <!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- LOGIN PAGE -->
 <div id="loginPage" class="login-container">
+    
     <div class="login-image">
-        <img src="city.jpg">
+        <img src="city.jpg" alt="City Image">
     </div>
 
     <div class="login-form">
-        <h2>Smart City Grievance</h2>
+        <h2><i class="fas fa-city"></i> Smart City Grievance</h2>
+        <p>Report issues easily & track complaints</p>
+
         <input type="text" id="username" placeholder="Enter Username">
         <button onclick="login()">Login</button>
     </div>
+
 </div>
 
-<!-- MAIN -->
+<!-- MAIN APP -->
 <div id="mainApp" class="hidden">
 
+    <!-- NAVBAR -->
     <div class="navbar">
-        <h2>Smart City</h2>
+        <h2><i class="fas fa-building"></i> Smart City Dashboard</h2>
         <span id="userDisplay"></span>
     </div>
 
     <div class="container">
 
-        <!-- FORM -->
+        <!-- COMPLAINT FORM -->
         <div class="card">
-            <h3>Submit Complaint</h3>
+            <h3><i class="fas fa-edit"></i> Submit Complaint</h3>
 
             <input type="text" id="name" placeholder="Your Name">
-            <textarea id="complaint" placeholder="Enter complaint"></textarea>
 
-            <input type="text" id="location" readonly placeholder="Location">
-            <button onclick="getLocation()">📍 Get Location</button>
+            <textarea id="complaint" placeholder="Describe your issue"></textarea>
 
-            <button onclick="submitComplaint()">Submit</button>
+            <input type="text" id="location" placeholder="Location (GPS)" readonly>
+
+            <button onclick="getLocation()">
+                <i class="fas fa-map-marker-alt"></i> Get Location
+            </button>
+
+            <button onclick="submitComplaint()">
+                <i class="fas fa-paper-plane"></i> Submit
+            </button>
         </div>
 
-        <!-- LIST -->
+        <!-- COMPLAINT LIST -->
         <div class="card">
-            <h3>Complaints</h3>
+            <h3><i class="fas fa-list"></i> Complaints</h3>
             <ul id="complaintList"></ul>
         </div>
 
-        <!-- MAP -->
+        <!-- MAP VIEW -->
         <div id="mapContainer" class="card hidden">
-            <h3>Location Map</h3>
-            <iframe id="mapFrame" width="100%" height="300"></iframe>
+            <h3><i class="fas fa-map"></i> Location Map</h3>
+            <iframe 
+                id="mapFrame" 
+                width="100%" 
+                height="300" 
+                style="border:0;"
+                loading="lazy">
+            </iframe>
         </div>
 
     </div>
+
 </div>
 
+<!-- SCRIPT (IMPORTANT: module type for Firebase) -->
 <script type="module" src="script.js"></script>
+
 </body>
 </html>
